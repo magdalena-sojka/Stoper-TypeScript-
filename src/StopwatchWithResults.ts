@@ -4,23 +4,25 @@ class StopwatchWithResults extends Stopwatch {
   
   results = []
 
-  constructor(element) {
+  constructor(element: HTMLDivElement) {
     super(element)
     this.prepareElements(element)
     this.prepareActions()
   }
 
-  prepareElements(element) {
-    this.dom.resultsList = element.querySelector('.stopwatch__results')
-    this.dom.addToListBtn = element.querySelector('.stopwatch__start-add-to-list')
-    this.dom.resetListBtn = element.querySelector('.stopwatch__start-reset-list')
+  private prepareElements(element: HTMLDivElement): void {
+    this.dom.resultsList = element.querySelector('.stopwatch__results') as HTMLDivElement;
+    this.dom.addToListBtn = element.querySelector('.stopwatch__start-add-to-list') as HTMLDivElement;
+    this.dom.resetListBtn = element.querySelector('.stopwatch__start-reset-list')as HTMLDivElement;
   }
 
-  prepareActions() {
+  private prepareActions(): void {
     /*
     Funkcja ta powinna dodawać nasłuchwiacze do buttonów this.dom.addToListBtn oraz this.dom.resetListBtn.
     Pierwszy powinien po kliknięciu uruchamiać metodę this.addToList, a druga this.resetList.
     */
+    //this.dom.addToListBtn.addEventListener("click", () => this.addToList());
+    //this.dom.resetListBtn.addEventListener("click", () => this.resetList());
   }
 
   renderList() {
@@ -30,6 +32,9 @@ class StopwatchWithResults extends Stopwatch {
 
     np. <li>00:12:00</li>
     */
+   
+    //this.dom.resultList.innerHTML = '';
+    //
   }
 
   addToList() {
@@ -39,10 +44,12 @@ class StopwatchWithResults extends Stopwatch {
     */
   }
 
-  resetList() {
+  protected resetList(): void {
     /*
     Funkcja ta powinna czyścić tablicę this.results oraz zawartość this.dom.resultsList
     */
+    //this.results = [];
+    //this.dom.resultsList.innerHTML = "";
   }
 
 }
