@@ -3,13 +3,15 @@ interface StopwatchDom {
   startBtn: HTMLButtonElement;
   stopBtn: HTMLButtonElement;
   resetBtn: HTMLButtonElement;
-  [x: string]: HTMLElement
+  [x: string]: HTMLElement;
 }
+
+export type timeString = `${string}:${string}:${string}`;
 
 abstract class Stopwatch {
 
   protected currentTime: number = 0;
-  private timer: number | null = null ;
+  private timer: NodeJS.Timer | null = null ;
   protected dom = {} as StopwatchDom;
 
   constructor(element: HTMLDivElement) {
@@ -48,7 +50,7 @@ abstract class Stopwatch {
     this.dom.resetBtn.addEventListener('click', () => this.reset());
   }
 
-  protected formatTime(time: number): string {
+  protected formatTime(time: number): timeString {
     /*
     Funkcja ta powinna przyjmować czas w milisekundach a następnie zwracać go w formacie mm:ss:ms (np. 02:23:12).
     */
@@ -77,7 +79,7 @@ abstract class Stopwatch {
 
     Dla wygody przypisz ten interwał do this.timer
     */
-    this.timer = setInterval(this.step, 1) as any;
+    this.timer = setInterval(this.step, 1);
   }
 
   protected step(): void {
@@ -85,7 +87,7 @@ abstract class Stopwatch {
     Funkcja ta powinna zwiększać liczbę sekund w this.currentTime o jeden, a następnie uruchamiać metodę
     renderującą aktualny czas w HTML-u (this.renderTime).
     */
-    this.timer = this.currentTime + 1;
+    this.currentTime++;
     this.renderTime();
   }
 

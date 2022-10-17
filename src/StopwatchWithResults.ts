@@ -1,8 +1,9 @@
 import Stopwatch from './Stopwatch.js'
+import type { timeString } from './Stopwatch.js'
 
 class StopwatchWithResults extends Stopwatch {
   
-  results = []
+  results: timeString[] = []
 
   constructor(element: HTMLDivElement) {
     super(element)
@@ -11,9 +12,9 @@ class StopwatchWithResults extends Stopwatch {
   }
 
   private prepareElements(element: HTMLDivElement): void {
-    this.dom.resultsList = element.querySelector('.stopwatch__results') as HTMLDivElement;
-    this.dom.addToListBtn = element.querySelector('.stopwatch__start-add-to-list') as HTMLDivElement;
-    this.dom.resetListBtn = element.querySelector('.stopwatch__start-reset-list')as HTMLDivElement;
+    this.dom.resultsList = (element.querySelector(".stopwatch__results")) as HTMLDivElement;
+    this.dom.addToListBtn = (element.querySelector(".stopwatch__add-to-list-btn")) as HTMLButtonElement;
+    this.dom.resetListBtn = (element.querySelector(".stopwatch__reset-list-btn")) as HTMLButtonElement;
   }
 
   private prepareActions(): void {
@@ -21,11 +22,11 @@ class StopwatchWithResults extends Stopwatch {
     Funkcja ta powinna dodawać nasłuchwiacze do buttonów this.dom.addToListBtn oraz this.dom.resetListBtn.
     Pierwszy powinien po kliknięciu uruchamiać metodę this.addToList, a druga this.resetList.
     */
-    //this.dom.addToListBtn.addEventListener("click", () => this.addToList());
-    //this.dom.resetListBtn.addEventListener("click", () => this.resetList());
+    this.dom.addToListBtn.addEventListener("click", () => this.addToList());
+    this.dom.resetListBtn.addEventListener("click", () => this.resetList());
   }
 
-  renderList() {
+  private renderList() {
     /*
     Funkcja ta powinna czyścić zawartość this.dom.resultsList, a następnie renderować w niej nowe elementy li
     na podstawie zawartości tablicy this.results. Każdy jej element powinien być renderowany bez żadnych zmian.
@@ -33,23 +34,32 @@ class StopwatchWithResults extends Stopwatch {
     np. <li>00:12:00</li>
     */
    
-    //this.dom.resultList.innerHTML = '';
-    //
+    this.dom.resultList.innerHTML = '';
+    let html = '';
+
+    for(const time of this.results) {
+      html += '<li>' + time + '</li>';
+    }
+
+    this.dom.resultList.innerHTML = html;
+    
   }
 
-  addToList() {
+  private addToList() {
     /*
     Funkcja ta powinna pobierać aktualny czas z this.currentTime, formatować go i w takiej postaci zapisywać do tablicy this.results.
     Następnie powinna renderować aktualną listę na stronie (this.renderList).
     */
+    this.results.push(this.formatTime(this.currentTime));
+    this.renderList();
   }
 
-  protected resetList(): void {
+  private resetList(): void {
     /*
     Funkcja ta powinna czyścić tablicę this.results oraz zawartość this.dom.resultsList
     */
-    //this.results = [];
-    //this.dom.resultsList.innerHTML = "";
+    this.results = [];
+    this.renderList();
   }
 
 }
