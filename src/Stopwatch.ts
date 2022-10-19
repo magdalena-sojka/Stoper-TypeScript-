@@ -24,9 +24,9 @@ abstract class Stopwatch {
     /*
     Funkcja ta powinna przyjąć jako argument referencję do elementu DOM, w którym znajduje się
     cała struktura stopera. Następnie powinna przygotować referencję do obecnych w tym elemencie dzieci.
-    
-    Konkretnie do: 
-    – stopwatch__current-time, 
+
+    Konkretnie do:
+    – stopwatch__current-time,
     – wszystkich buttonów stopwatch__actions
     Wszystkie referencje dla czytelności przechowuj w obiekcie this.dom.
     */
@@ -38,7 +38,7 @@ abstract class Stopwatch {
 
   private initActions(): void {
     /*
-    Funkcja ta powinna nadać buttonom z buttonów stopwatch__actions odpowiednie nasłuchiwacze na event click. 
+    Funkcja ta powinna nadać buttonom z buttonów stopwatch__actions odpowiednie nasłuchiwacze na event click.
     Kliknięcie na każdy z buttonów powinno uruchamiać odpowiednie funkcje.
     Start -> start()
     Stop -> stop()
@@ -57,7 +57,7 @@ abstract class Stopwatch {
     const pad0 = (num: number): string => (
       num < 10 ? `0${num}` : num.toString()
     );
-  
+
     const mm = Math.floor(time/60000);
     const ss = Math.floor((time - mm * 60000)/1000);
     const ms = time - mm * 60000 - ss * 1000;
@@ -67,10 +67,10 @@ abstract class Stopwatch {
   protected renderTime(): void {
     /*
     Funkcja ta powinna renderować w stopwatch__current-time zawartość obiektu this.currentTime.
-    Oczywiście wcześniej należy sformatować czas przy użyciu funkcji this.formatTime. 
+    Oczywiście wcześniej należy sformatować czas przy użyciu funkcji this.formatTime.
     */
     this.dom.currentTime.innerHTML = this.formatTime(this.currentTime);
-  } 
+  }
 
   protected start(): void {
     /*
@@ -79,7 +79,7 @@ abstract class Stopwatch {
 
     Dla wygody przypisz ten interwał do this.timer
     */
-    this.timer = setInterval(this.step, 1);
+    this.timer = setInterval(() => this.step(), 1);
   }
 
   protected step(): void {
@@ -92,7 +92,7 @@ abstract class Stopwatch {
   }
 
   protected stop(): void {
-    /* 
+    /*
     Funkcja ta powinna zatrzymywać interval przypisany do this.timer.
     */
     if (this.timer) {

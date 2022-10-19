@@ -2,7 +2,7 @@ import Stopwatch from './Stopwatch.js'
 import type { timeString } from './Stopwatch.js'
 
 class StopwatchWithResults extends Stopwatch {
-  
+
   results: timeString[] = []
 
   constructor(element: HTMLDivElement) {
@@ -33,16 +33,16 @@ class StopwatchWithResults extends Stopwatch {
 
     np. <li>00:12:00</li>
     */
-   
-    this.dom.resultList.innerHTML = '';
+
+    this.dom.resultsList.innerHTML = '';
     let html = '';
 
     for(const time of this.results) {
       html += '<li>' + time + '</li>';
     }
 
-    this.dom.resultList.innerHTML = html;
-    
+    this.dom.resultsList.innerHTML = html;
+
   }
 
   private addToList() {
