@@ -1,6 +1,16 @@
 import Stopwatch from './Stopwatch.js'
-import type { timeString } from './Stopwatch.js'
+import type { timeString } from './Stopwatch.js';
 
+function measurePerformance(target: any, name: string, descriptor: any) {
+  const originalMethod = descriptor.value;
+  descriptor.value = function (...args) {
+   const start = performance.now()
+   const result = originalMethod.apply(this, args)
+   const finish = performance.now()
+   console.info(`${name} execution time is ${finish - start} milliseconds`)
+   return result;
+ }
+}
 class StopwatchWithResults extends Stopwatch {
 
   results: timeString[] = []
@@ -26,6 +36,7 @@ class StopwatchWithResults extends Stopwatch {
     this.dom.resetListBtn.addEventListener("click", () => this.resetList());
   }
 
+  @measurePerformance
   private renderList() {
     /*
     Funkcja ta powinna czyścić zawartość this.dom.resultsList, a następnie renderować w niej nowe elementy li
