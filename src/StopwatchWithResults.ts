@@ -35,14 +35,13 @@ class StopwatchWithResults extends Stopwatch {
     */
 
     this.dom.resultsList.innerHTML = '';
-    let html = '';
+    let html = 'Results...';
 
     for(const time of this.results) {
       html += '<li>' + time + '</li>';
     }
 
     this.dom.resultsList.innerHTML = html;
-
   }
 
   private addToList() {

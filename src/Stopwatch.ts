@@ -79,7 +79,7 @@ abstract class Stopwatch {
 
     Dla wygody przypisz ten interwał do this.timer
     */
-    this.timer = setInterval(() => this.step(), 1);
+    this.timer = setInterval(() => this.step(), 100);
   }
 
   protected step(): void {
@@ -87,7 +87,7 @@ abstract class Stopwatch {
     Funkcja ta powinna zwiększać liczbę sekund w this.currentTime o jeden, a następnie uruchamiać metodę
     renderującą aktualny czas w HTML-u (this.renderTime).
     */
-    this.currentTime++;
+    this.currentTime += 100;
     this.renderTime();
   }
 
